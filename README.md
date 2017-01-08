@@ -1,7 +1,20 @@
 # Github Trends
 
-[TODO. There will be project description]
+  
 
-# Project Goals
+**Install requirements:**  
 
-The code is written for educational purposes. Training course for web-developers - [DEVMAN.org](https://devman.org)
+    pip3 install -r requirements.txt
+
+**run script:**  
+
+    $ python3 github_trending.py
+
+**run example:**  
+
+    Repo name:  Traits  
+      URL:      https://github.com/krzysztofzablocki/Traits  
+      Stars:    477  
+      Issues:   1  
+      ..........
+  

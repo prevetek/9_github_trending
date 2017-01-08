@@ -12,25 +12,14 @@ def get_trending_repositories(top_size=20):
     return json.loads(response.text)['items']
 
 
-def get_open_issues_amount(repo_owner, repo_name):
-    response = requests.get("https://api.github.com/repos/" + repo_owner + "/" + repo_name + "/issues")
-    return json.loads(response.text)
-
-
 def main():
     repos = get_trending_repositories()
     for repo in repos:
-        issues = get_open_issues_amount(repo['owner']['login'], repo['name'])
-        print(repo)
-        print(repo['html_url'])
-        print(repo['stargazers_count'])
-        print(repo['open_issues'])
-        print(repo['open_issues_count'])
-        print(issues)
-        # pretty = json.dumps(issues, ensure_ascii=False, indent=4, sort_keys=True)
-        # print(pretty)
+        print('Repo name: ', repo['name'])
+        print('  URL:     ', repo['html_url'])
+        print('  Stars:   ', repo['stargazers_count'])
+        print('  Issues:  ', repo['open_issues'])
         print()
-    print(len(repos))
 
 
 if __name__ == '__main__':
