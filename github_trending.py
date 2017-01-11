@@ -9,22 +9,25 @@ def get_date_days_ago(days=0):
 
 
 def get_trending_repositories(page_size=100):
-    date_week_ago = get_date_days_ago(7)
-    payload = {'q': 'created:>' + date_week_ago,
+    days_per_week = 7
+    date_week_ago = get_date_days_ago(days_per_week)
+    payload = {'q': 'created:>{}'.format(date_week_ago),
                'sort': 'stars',
                'per_page': page_size}
     response = requests.get("https://api.github.com/search/repositories", params=payload)
-    return json.loads(response.text)['items']
+    list_repositories = json.loads(response.text)['items']
+    return list_repositories
 
 
 def printing(repositories):
     for repo in repositories:
-        print('Repo name: {0}\n'
-              '  URL:     {1}\n'
-              '  Stars:   {2}\n'
-              '  Issues:  {3}\n'
-              ''.format(repo['name'], repo['html_url'], repo['stargazers_count'], repo['open_issues'])
-              )
+        printing_str = """\
+Repo name: {0}
+ URL:      {1}
+ Stars:    {2}
+ Issues:   {3}
+"""
+        print(printing_str.format(repo['name'], repo['html_url'], repo['stargazers_count'], repo['open_issues']))
 
 
 if __name__ == '__main__':
